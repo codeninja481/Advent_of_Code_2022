@@ -28,11 +28,61 @@ In this example, if you were to follow the strategy guide, you would get a total
 
 What would your total score be if everything goes exactly according to your strategy guide?
 """
-#RPS = open("Day_Two_Rock_Paper_Scissors_Input.txt").read().split('\n')
-RPS = open("Day_Two_Rock_Paper_Scissors_Test_Input.txt").read().split('\n')
+RPS = open("Day_Two_Rock_Paper_Scissors_Input.txt").read().split('\n')
+#RPS = open("Day_Two_Rock_Paper_Scissors_Test_Input.txt").read().split('\n')
+
+"""
+A - Rock
+B - Paper
+C - Scissors
+X - Rock
+Y - Paper
+Z - Scissors
+"""
+myScore = 0
+
+def getScore(opp, me, score):
+
+	if opp == "A":
+		if me == "X":
+			print("opp threw rock, you threw rock.  Scored as a draw")
+			score = score + (1 + 3)
+		elif me == "Y":
+			print("opp threw rock, you threw paper.  Scored as a win")
+			score = score + (2 + 6)
+		elif me == "Z":
+			print("opp threw rock, you threw scissors.  Scored as a loss")
+			score = score + (3 + 0)
+	elif opp == "B":
+		if me == "X":
+			print("opp threw paper, you threw rock.  Scored as a loss")
+			score = score + (1 + 0)
+		elif me == "Y":
+			print("opp threw paper, you threw paper.  Scored as a draw")
+			score = score + (2 + 3)
+		elif me == "Z":
+			print("opp threw paper, you threw scissors.  Scored as a win")
+			score = score + (3 + 6)
+	elif opp == "C":
+		if me == "X":
+			print("opp threw scissors, you threw rock.  Scored as a win")
+			score = score + (1 + 6)
+		elif me == "Y":
+			print("opp threw scissors, you threw paper.  Scored as a loss")
+			score = score + (2 + 0)
+		elif me == "Z":
+			print("opp threw scissors, you threw scissors.  Scored as a draw")					
+			score = score + (3 + 3)
+
+	return score
 
 for r in RPS:
 	print(r)
 	print(r[0])
 	#print(r[1])
 	print(r[2])
+	myScore = getScore(r[0], r[2], myScore)
+
+print("Your final score is: " + str(myScore))
+print("The answer is not 11264.  Too Low.")
+print("The right answer is 11906")
