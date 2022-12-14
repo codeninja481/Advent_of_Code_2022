@@ -20,7 +20,8 @@ wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw
 
-The first rucksack contains the items vJrwpWtwJgWrhcsFMMfFFhFp, which means its first compartment contains the items vJrwpWtwJgWr, while the second compartment contains the items hcsFMMfFFhFp. 
+The first rucksack contains the items vJrwpWtwJgWrhcsFMMfFFhFp, which means its first compartment contains 
+  the items vJrwpWtwJgWr, while the second compartment contains the items hcsFMMfFFhFp. 
 The only item type that appears in both compartments is lowercase p.
 The second rucksack's compartments contain jqHRNqRjqzjGDLGL and rsFMfFZSrLrFZsSL. The only item type that appears in both compartments is uppercase L.
 The third rucksack's compartments contain PmmdzqPrV and vPwwTWBwg; the only common item type is uppercase P.
@@ -31,28 +32,61 @@ To help prioritize item rearrangement, every item type can be converted to a pri
 
 Lowercase item types a through z have priorities 1 through 26.
 Uppercase item types A through Z have priorities 27 through 52.
-In the above example, the priority of the item type that appears in both compartments of each rucksack is 16 (p), 38 (L), 42 (P), 22 (v), 20 (t), and 19 (s); the sum of these is 157.
+In the above example, the priority of the item type that appears in both compartments of each 
+  rucksack is 16 (p), 38 (L), 42 (P), 22 (v), 20 (t), and 19 (s); the sum of these is 157.
 
 Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?
 """
 
-#RuckContents = open("Day_Three_Rucksack_Reorganization_Input.txt").read().split('\n')
-RuckContents = open("Day_Three_Rucksack_Reorganization_Test_Input.txt").read().split('\n')
+RuckContents = open("Day_Three_Rucksack_Reorganization_Input.txt").read().split('\n')
+#RuckContents = open("Day_Three_Rucksack_Reorganization_Test_Input.txt").read().split('\n')
+scores = open("Day_Three_Rucksack_Reorganization_Scoring.txt").read().split('\n')
 
 compartment1 = ""
 compartment2 = ""
+totalScore = 0
+
+match = ""
+
+def getScore(m):
+	tScore = 0
+	print("Getting Score.")
+	for s in scores:
+		if str(s[0]) == str(m):
+			if len(s) == 3:
+				tScore = tScore + int(str(s[2]))
+			elif len(s) == 4:
+				tScore = tScore + int(str(s[2]+s[3]))
+			return tScore
 
 def compareCompartments(comp1, comp2):
-	#FIXME
+	matchCount = 0
+	totScore = 0
+	matches = [-1] * len(comp1)
+	for c2 in comp2: 
+		match = comp1.find(c2)
+		if match != -1:
+			matches[matchCount] = match
+			matchCount = matchCount + 1
 
-	return
+	for m in matches:
+		if m != -1:
+			score = getScore(comp1[int(m)])
+			break
+
+	totScore = totScore + score
+	return totScore
 
 
 
 for r in RuckContents:
 	compartment1 = r[0:int(len(r)/2)]
 	compartment2 = r[int(len(r)/2):]
-	print("Ruck contains: " + r + " which has " + str(int(len(r))) + " items, " + str(int(len(r)/2)) + " items per compartment." + "  Compartment 1 contains: " + compartment1 + " and  compartment 2 contains: " + compartment2)
+
+	totalScore = totalScore + compareCompartments(compartment1, compartment2)
+
+	print("Total Score is: " + str(totalScore))
+	print("The correct answer is: 8153")
 
 
 #Ruck contains: vJrwpWtwJgWrhcsFMMfFFhFp which has 24 items, 12 items per compartment.  Compartment 1 contains: vJrwpWtwJgWr and  compartment 2 contains: hcsFMMfFFhFp
