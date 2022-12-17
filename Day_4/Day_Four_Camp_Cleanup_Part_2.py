@@ -27,7 +27,7 @@ def compareAssignments(a1, a2):
 	print("a: " + a[0] + " - " + a[1])
 	print("b: " + b[0] + " - " + b[1])
 	match = 0
-	if (int(b[0]) <= int(a[1]) and b[1] >= a[0]) or (int(a[1]) <= int(b[1]) and b[0] <= a[1]):
+	if (int(b[0]) <= int(a[1]) and int(b[1]) >= int(a[0])) or (int(a[1]) <= int(b[1]) and int(b[0]) <= int(a[1])):
 		print("MATCH")
 		match = 1
 	else:
@@ -45,4 +45,4 @@ for s in Sections:
 print("Total Matches: " + str(totalMatches))
 print("The correct answer is NOT 955.  Too high.")
 print("The correct answer is NOT 885.  Too low.")
-print("The correct answer is 571")
+print("The correct answer could be 917")
