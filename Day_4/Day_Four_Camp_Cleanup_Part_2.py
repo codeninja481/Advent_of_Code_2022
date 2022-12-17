@@ -45,4 +45,4 @@ for s in Sections:
 print("Total Matches: " + str(totalMatches))
 print("The correct answer is NOT 955.  Too high.")
 print("The correct answer is NOT 885.  Too low.")
-print("The correct answer could be 917")
+print("The correct answer is 917")
